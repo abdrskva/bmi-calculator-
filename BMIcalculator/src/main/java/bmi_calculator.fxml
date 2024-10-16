@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="center" xmlns:fx="http://javafx.com/fxml/1">
+    <MenuBar>
+        <Menu text="File">
+            <MenuItem text="Clear">
+                <onAction>#clearFields</onAction>
+            </MenuItem>
+            <MenuItem text="Exit">
+                <onAction>#exitApp</onAction>
+            </MenuItem>
+        </Menu>
+        <Menu text="Help">
+            <MenuItem text="How to Use">
+                <onAction>#showHelp</onAction>
+            </MenuItem>
+        </Menu>
+    </MenuBar>
+
+    <Label text="Weight:"/>
+    <TextField fx:id="weightField"/>
+
+    <Label text="Height:"/>
+    <TextField fx:id="heightField"/>
+
+    <Label text="Unit:"/>
+    <ChoiceBox fx:id="unitChoice">
+    </ChoiceBox>
+
+    <Button text="Calculate BMI">
+        <onAction>#calculateBMI</onAction>
+    </Button>
+
+    <Label fx:id="resultLabel"/>
+</VBox>
