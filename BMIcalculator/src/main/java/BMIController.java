@@ -1,5 +1,3 @@
-package org.example.bmicalculator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -10,40 +8,40 @@ import javafx.application.Platform;
 public class BMIController {
 
     @FXML
-    private TextField weightField;
+    private TextField weightField; // Input field for weight
     @FXML
-    private final TextField heightField;
+    private TextField heightField; // Input field for height
     @FXML
-    private final ChoiceBox<String> unitChoice;
+    private ChoiceBox<String> unitChoice; // Dropdown for selecting unit type
     @FXML
-    private Label resultLabel;
+    private Label resultLabel; // Label to display the BMI result
 
-    public BMIController(TextField heightField, ChoiceBox<String> unitChoice) {
-        this.heightField = heightField;
-        this.unitChoice = unitChoice;
-    }
+    // Method to calculate BMI when the button is clicked
 
-    @FXML
     public void calculateBMI() {
         try {
+            // Parse input values
             double weight = Double.parseDouble(weightField.getText());
             double height = Double.parseDouble(heightField.getText());
             String unit = unitChoice.getValue();
 
             double bmi;
 
+            // Calculate BMI based on selected unit type
             if ("Metric (kg, m)".equals(unit)) {
                 bmi = weight / (height * height);
             } else {
                 bmi = (weight / (height * height)) * 703; // Convert lbs/inches to BMI
             }
 
+            // Display the BMI and status
             resultLabel.setText(String.format("Your BMI: %.2f - %s", bmi, getBMIStatus(bmi)));
         } catch (NumberFormatException e) {
-            resultLabel.setText("Invalid input!");
+            resultLabel.setText("Invalid input!"); // Error message for invalid input
         }
     }
 
+    // Method to determine BMI status based on calculated BMI
     private String getBMIStatus(double bmi) {
         if (bmi < 18.5) return "Underweight";
         else if (bmi < 25) return "Normal";
@@ -51,6 +49,7 @@ public class BMIController {
         else return "Obese";
     }
 
+    // Method to clear input fields and results
     @FXML
     public void clearFields() {
         weightField.clear();
@@ -58,11 +57,13 @@ public class BMIController {
         resultLabel.setText("");
     }
 
+    // Method to exit the application
     @FXML
     public void exitApp() {
         Platform.exit();
     }
 
+    // Method to show help information
     @FXML
     public void showHelp() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -71,5 +72,4 @@ public class BMIController {
         alert.setContentText("Enter your weight and height, select the unit, and click 'Calculate BMI'.");
         alert.showAndWait();
     }
-
 }
